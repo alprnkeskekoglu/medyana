@@ -3,19 +3,27 @@
         <div class="block-header block-header-default">
             <div class="row w-100">
                 <div class="col-md-4">
+                    <select class="form-control" v-model="params.clinic_id">
+                        <option value="">Please Select Clinic</option>
+                        <option v-for="clinic in clinics" :value="clinic.id" v-html="clinic.name"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
                     <input type="text" class="form-control" placeholder="Search..." v-model="params.search">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <select class="form-control" v-model="params.sort">
                         <option value="">Sort By</option>
                         <option value="a-z">Name (A-Z)</option>
                         <option value="z-a">Name (Z-A)</option>
-                        <option value="h-l">Equipment (High-Low)</option>
-                        <option value="l-h">Equipment (Low-High)</option>
+                        <option value="rhl">Usage Rate (High-Low)</option>
+                        <option value="rlh">Usage Rate (Low-High)</option>
+                        <option value="phl">Unit Price (High-Low)</option>
+                        <option value="plh">Unit Price (Low-High)</option>
                     </select>
                 </div>
-                <div class="col-md-2 offset-md-2 text-right">
-                    <a href="/clinics/create" class="btn btn-sm btn-primary" data-toggle="click-ripple">
+                <div class="col-md-2 text-right">
+                    <a href="/equipments/create" class="btn btn-sm btn-primary" data-toggle="click-ripple">
                         <i class="fa fa-fw fa-plus mr-1"></i>
                         Add New
                     </a>
@@ -28,29 +36,35 @@
                 <tr>
                     <th class="text-center" style="width: 50px;">#</th>
                     <th>Status</th>
+                    <th>Clinic Name</th>
                     <th>Name</th>
-                    <th class="text-center">Equipment Count</th>
+                    <th>Unite Price</th>
+                    <th>Usage Rate</th>
                     <th>Created At</th>
                     <th class="text-center" style="width: 100px;">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="clinic in clinics">
-                    <th class="text-center" scope="row" v-html="clinic.id"></th>
+                <tr v-for="equipment in equipments">
+                    <th class="text-center" scope="row" v-html="equipment.id">1</th>
                     <th class="text-center">
-                        <span :class="'badge ' + (clinic.status == 1 ? 'badge-success' : 'badge-danger')">{{ clinic.status == 1 ? 'Active' : 'Passive' }}</span>
+                        <span :class="'badge ' + (equipment.status == 1 ? 'badge-success' : 'badge-danger')">{{ equipment.status == 1 ? 'Active' : 'Passive' }}</span>
                     </th>
                     <td class="font-w600">
-                        <a :href="'/clinics/' + clinic.id + '/edit'" v-html="clinic.name"></a>
+                        <a :href="'/clinics/' + equipment.clinic.id + '/edit'" v-html="equipment.clinic.name"></a>
                     </td>
-                    <td class="text-center" v-html="clinic.equipment_count"></td>
-                    <td class="d-none d-sm-table-cell" v-html="clinic.created_at"></td>
+                    <td class="font-w600">
+                        <a :href="'/equipments/' + equipment.id + '/edit'" v-html="equipment.name"></a>
+                    </td>
+                    <td class="d-none d-sm-table-cell" v-html="equipment.unit_price"></td>
+                    <td class="d-none d-sm-table-cell" v-html="equipment.rate + '%'"></td>
+                    <td class="d-none d-sm-table-cell" v-html="equipment.created_at"></td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <a :href="'/clinics/' + clinic.id + '/edit'" class="btn btn-sm btn-info js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Edit">
+                            <a :href="'/equipments/' + equipment.id + '/edit'" class="btn btn-sm btn-info js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Edit">
                                 <i class="fa fa-pencil-alt"></i>
                             </a>
-                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Delete" @click="deleteClinic(clinic.id)">
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Delete" @click="deleteEquipment(equipment.id)">
                                 <i class="fa fa-trash-alt"></i>
                             </button>
                         </div>
@@ -86,8 +100,10 @@ export default {
     data() {
         return {
             clinics: {},
+            equipments: {},
             links: {},
             params: {
+                clinic_id: '',
                 search: '',
                 sort: '',
                 page: 1,
@@ -98,32 +114,36 @@ export default {
         params: {
             deep: true,
             handler: function () {
-                this.getClinics();
+                this.getEquipments();
             }
         }
     },
     mounted() {
+        this.getEquipments();
         this.getClinics();
-
     },
     methods: {
         getClinics: function () {
-            axios.get('/getClinicByParams', {
+            axios.get('/getClinics').
+            then(response => {
+                this.clinics = response.data.clinics;
+            })
+        },
+        getEquipments: function () {
+            axios.get('/getEquipments', {
                 params: this.params
             }).
             then(response => {
-                this.clinics = response.data.clinics;
+                this.equipments = response.data.equipments;
                 this.links = response.data.links;
-
-                console.log(this.clinics);
             })
         },
-        deleteClinic: function (id) {
+        deleteEquipment: function (id) {
             if(confirm('Are You Sure?')) {
-                axios.delete('/clinics/' + id).
+                axios.delete('/equipments/' + id).
                 then(response => {
                     this.$root.success = response.data.message;
-                    this.getClinics();
+                    this.getEquipments();
                 }).catch(e => {
                     this.$root.success = null;
                     this.$root.errors = e.response.data.errors;

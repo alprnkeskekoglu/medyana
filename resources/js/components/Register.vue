@@ -77,7 +77,7 @@ export default {
                 this.$root.success = response.data.message;
                 setTimeout(function () {
                     window.location.href = '/login';
-                }, 1250)
+                }, 750)
             }).catch(e => {
                 this.$root.success = null;
                 this.$root.errors = e.response.data.errors;

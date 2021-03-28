@@ -2,24 +2,29 @@
 
 namespace App\Contracts\DataSource;
 
-use App\Models\Clinic;
+use App\Models\Equipment;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class ClinicDataSource
+class EquipmentDataSource
 {
     /**
-     * @param Clinic $clinic
+     * @param Equipment $equipment
      * @return array
      */
-    public function toArray(Clinic $clinic): array
+    public function toArray(Equipment $equipment): array
     {
         return [
-            'id' => $clinic->id,
-            'status' => $clinic->status,
-            'name' => $clinic->name,
-            'equipment_count' => $clinic->equipments()->count(),
-            'created_at' => $clinic->created_at->format('d/m/Y'),
+            'id' => $equipment->id,
+            'status' => $equipment->status,
+            'clinic_id' => $equipment->clinic_id,
+            'name' => $equipment->name,
+            'supply_date' => $equipment->supply_date,
+            'stock' => $equipment->stock,
+            'unit_price' => $equipment->unit_price,
+            'rate' => $equipment->rate,
+            'created_at' => $equipment->created_at->format('d/m/Y'),
+            'clinic' => (new ClinicDataSource())->toArray($equipment->clinic)
         ];
     }
 
@@ -43,8 +48,8 @@ class ClinicDataSource
      */
     public function paginate(LengthAwarePaginator $paginator): array
     {
-        $hold['clinics'] = $this->collection($paginator->getCollection());
-        $paginator = $paginator->withPath('/getClinics');
+        $hold['equipments'] = $this->collection($paginator->getCollection());
+        $paginator = $paginator->withPath('/getEquipments');
         $hold['links'] = [
             'first' => 1,
             'prev' => $paginator->currentPage() > 1 ? $paginator->currentPage() - 1 : null,

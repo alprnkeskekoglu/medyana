@@ -39,7 +39,7 @@ class ClinicRepository implements ClinicInterface
      * @param int $perPage
      * @return LengthAwarePaginator
      */
-    public function getByParameters(Request $request, int $perPage = 12): LengthAwarePaginator
+    public function getByParameters(Request $request, int $perPage = 10): LengthAwarePaginator
     {
         $search = $request->get('search') ?: null;
         $sort = $request->get('sort') ?: null;
@@ -67,13 +67,7 @@ class ClinicRepository implements ClinicInterface
             }
         }
 
-        if ($search || $sort) {
-            $page = 1;
-        } else {
-            $page = $request->get('page');
-        }
-
-        return $clinics->paginate($perPage, ['*'], 'page', $page);
+        return $clinics->paginate($perPage);
     }
 
     /**
@@ -90,11 +84,11 @@ class ClinicRepository implements ClinicInterface
     }
 
     /**
-     * @param Clinic $clinic
      * @param ClinicRequest $request
+     * @param Clinic $clinic
      * @return string[]
      */
-    public function update(Clinic $clinic, ClinicRequest $request): array
+    public function update(ClinicRequest $request, Clinic $clinic): array
     {
         $data = $request->except('_token');
 

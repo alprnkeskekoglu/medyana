@@ -2,17 +2,17 @@
 
 namespace App\Contracts\Interfaces;
 
-use App\Http\Requests\ClinicRequest;
-use App\Models\Clinic;
+use App\Http\Requests\EquipmentRequest;
+use App\Models\Equipment;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
- * Interface ClinicInterface
+ * Interface EquipmentInterface
  * @package App\Contracts\Interfaces
  */
-interface ClinicInterface
+interface EquipmentInterface
 {
     /**
      * @return Collection
@@ -21,9 +21,9 @@ interface ClinicInterface
 
     /**
      * @param int $id
-     * @return Clinic
+     * @return Equipment
      */
-    public function getById(int $id): Clinic;
+    public function getById(int $id): Equipment;
 
     /**
      * @param Request $request
@@ -33,21 +33,21 @@ interface ClinicInterface
     public function getByParameters(Request $request, int $perPage): LengthAwarePaginator;
 
     /**
-     * @param ClinicRequest $request
+     * @param EquipmentRequest $request
      * @return array
      */
-    public function store(ClinicRequest $request): array;
+    public function store(EquipmentRequest $request): array;
 
     /**
-     * @param ClinicRequest $request
-     * @param Clinic $clinic
+     * @param EquipmentRequest $request
+     * @param Equipment $equipment
      * @return array
      */
-    public function update(ClinicRequest $request, Clinic $clinic): array;
+    public function update(EquipmentRequest $request, Equipment $equipment): array;
 
     /**
-     * @param Clinic $clinic
+     * @param Equipment $equipment
      * @return array
      */
-    public function delete(Clinic $clinic): array;
+    public function delete(Equipment $equipment): array;
 }

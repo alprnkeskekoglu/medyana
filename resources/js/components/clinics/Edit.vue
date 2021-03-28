@@ -27,7 +27,7 @@
                                             <label class="custom-control-label" for="status_active">Active</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline custom-control-danger custom-control-lg">
-                                            <input type="radio" class="custom-control-input" id="status_passive" v-model="data.status" value="3" >
+                                            <input type="radio" class="custom-control-input" id="status_passive" v-model="data.status" value="2">
                                             <label class="custom-control-label" for="status_passive">Passive</label>
                                         </div>
                                     </div>
@@ -54,20 +54,18 @@ export default {
         return {
             id: 1,
             data: {
-                _token: window.token,
                 status: 1,
                 name: null,
             },
         }
     },
     mounted() {
-        this.id = window.clinic.id;
-        this.data.status = window.clinic.status;
-        this.data.name = window.clinic.name;
+        this.data = window.clinic;
+        this.data._token = window.token;
     },
     methods: {
         sendForm: function () {
-            axios.put('/clinics/' + this.id, this.data).
+            axios.put('/clinics/' + this.data.id, this.data).
             then(response => {
                 this.$root.success = response.data.message;
             }).catch(e => {

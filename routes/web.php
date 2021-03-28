@@ -28,9 +28,14 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('login.logout');
 
 
 Route::middleware('auth')->group(function () {
+    Route::redirect('/', '/clinics');
+
     Route::resource('clinics', ClinicController::class);
     Route::resource('equipments', EquipmentController::class);
 
     Route::get('/getClinics', [ClinicController::class, 'getClinics']);
+    Route::get('/getClinicByParams', [ClinicController::class, 'getClinicByParams']);
+
+    Route::get('/getEquipments', [EquipmentController::class, 'getEquipments']);
 });
 
