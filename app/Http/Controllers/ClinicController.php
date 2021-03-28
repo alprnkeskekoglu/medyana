@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class ClinicController
- * @package App\Http\Controllers
  */
 class ClinicController extends Controller
 {

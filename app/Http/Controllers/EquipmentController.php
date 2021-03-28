@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class EquipmentController
- * @package App\Http\Controllers
  */
 class EquipmentController extends Controller
 {
@@ -33,8 +32,11 @@ class EquipmentController extends Controller
      * @param EquipmentDataSource $equipmentDataSource
      * @param JsonOutput $output
      */
-    public function __construct(EquipmentRepository $equipmentRepository, EquipmentDataSource $equipmentDataSource, JsonOutput $output)
-    {
+    public function __construct(
+        EquipmentRepository $equipmentRepository,
+        EquipmentDataSource $equipmentDataSource,
+        JsonOutput $output
+    ) {
         $this->equipmentRepository = $equipmentRepository;
         $this->equipmentDataSource = $equipmentDataSource;
         $this->output = $output;

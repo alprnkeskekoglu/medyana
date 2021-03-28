@@ -8,6 +8,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class ClinicDataSource
 {
+    /**
+     * @param Clinic $clinic
+     * @return array
+     */
     public function toArray(Clinic $clinic): array
     {
         return [
@@ -19,6 +23,10 @@ class ClinicDataSource
         ];
     }
 
+    /**
+     * @param Collection $models
+     * @return array
+     */
     public function collection(Collection $models): array
     {
         $hold = [];
@@ -29,6 +37,10 @@ class ClinicDataSource
         return $hold;
     }
 
+    /**
+     * @param LengthAwarePaginator $paginator
+     * @return array
+     */
     public function paginate(LengthAwarePaginator $paginator): array
     {
         $hold['clinics'] = $this->collection($paginator->getCollection());
