@@ -3,7 +3,6 @@
         <div class="d-flex align-items-center">
             <!-- Logo -->
             <div class="">
-
                 <img src="{{ asset('assets/media/logo.png') }}" height="60" alt="">
             </div>
             <!-- END Logo -->
@@ -30,7 +29,7 @@
                         <div class="p-2">
                             <div role="separator" class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('login.logout') }}">
-                                <i class="far fa-fw fa-arrow-alt-circle-left mr-1"></i> {{ __('DawnstarLang::auth.log_out') }}
+                                <i class="far fa-fw fa-arrow-alt-circle-left mr-1"></i> Log Out
                             </a>
                         </div>
                     </div>

@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-4">
                     <select class="form-control" v-model="params.sort">
-                        <option value="">Please select</option>
+                        <option value="">Sort By</option>
                         <option value="a-z">Name (A-Z)</option>
                         <option value="z-a">Name (Z-A)</option>
                         <option value="h-l">Equipment (High-Low)</option>

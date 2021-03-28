@@ -21584,7 +21584,7 @@ var render = function() {
               }
             },
             [
-              _c("option", { attrs: { value: "" } }, [_vm._v("Please select")]),
+              _c("option", { attrs: { value: "" } }, [_vm._v("Sort By")]),
               _vm._v(" "),
               _c("option", { attrs: { value: "a-z" } }, [_vm._v("Name (A-Z)")]),
               _vm._v(" "),
@@ -22650,7 +22650,9 @@ var render = function() {
               }
             },
             [
-              _c("option", { attrs: { value: "" } }, [_vm._v("Please select")]),
+              _c("option", { attrs: { value: "" } }, [
+                _vm._v("Please Select Clinic")
+              ]),
               _vm._v(" "),
               _vm._l(_vm.clinics, function(clinic) {
                 return _c("option", {
@@ -22718,7 +22720,7 @@ var render = function() {
               }
             },
             [
-              _c("option", { attrs: { value: "" } }, [_vm._v("Please select")]),
+              _c("option", { attrs: { value: "" } }, [_vm._v("Sort By")]),
               _vm._v(" "),
               _c("option", { attrs: { value: "a-z" } }, [_vm._v("Name (A-Z)")]),
               _vm._v(" "),

@@ -4,7 +4,7 @@
             <div class="row w-100">
                 <div class="col-md-4">
                     <select class="form-control" v-model="params.clinic_id">
-                        <option value="">Please select</option>
+                        <option value="">Please Select Clinic</option>
                         <option v-for="clinic in clinics" :value="clinic.id" v-html="clinic.name"></option>
                     </select>
                 </div>
@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-3">
                     <select class="form-control" v-model="params.sort">
-                        <option value="">Please select</option>
+                        <option value="">Sort By</option>
                         <option value="a-z">Name (A-Z)</option>
                         <option value="z-a">Name (Z-A)</option>
                         <option value="rhl">Usage Rate (High-Low)</option>
