@@ -1,10 +1,6 @@
 <template>
     <div>
-        <div v-if="Object.keys(errors).length" class="alert alert-danger">
-            <div v-for="(v, k) in errors" :key="k">
-                <p v-for="error in v" :key="error" v-html="error"></p>
-            </div>
-        </div>
+        <alert></alert>
         <form>
             <div class="form-group">
                 <div class="input-group">
@@ -55,9 +51,6 @@ export default {
                 password: null,
                 remember: 1,
             },
-            errors: {},
-            success: null,
-
         }
     },
     methods: {
@@ -66,7 +59,7 @@ export default {
             then(response => {
                 window.location.href = '/clinics';
             }).catch(e => {
-                this.errors = e.response.data.errors;
+                this.$root.errors = e.response.data.errors;
             })
         }
     }

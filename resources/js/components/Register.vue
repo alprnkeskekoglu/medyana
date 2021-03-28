@@ -1,13 +1,6 @@
 <template>
     <div>
-        <div v-if="Object.keys(errors).length" class="alert alert-danger">
-            <div v-for="(v, k) in errors" :key="k">
-                <p v-for="error in v" :key="error" v-html="error"></p>
-            </div>
-        </div>
-        <div v-if="success" class="alert alert-success">
-            <p v-html="success"></p>
-        </div>
+        <alert></alert>
         <form>
             <div class="form-group">
                 <div class="input-group">
@@ -75,21 +68,19 @@ export default {
                 password: null,
                 password_confirmation: null,
             },
-            errors: {},
-            success: null,
-
         }
     },
     methods: {
         sendForm() {
             axios.post('/register', this.data).
             then(response => {
-                this.success = response.data.message;
+                this.$root.success = response.data.message;
                 setTimeout(function () {
                     window.location.href = '/login';
                 }, 1250)
             }).catch(e => {
-                this.errors = e.response.data.errors;
+                this.$root.success = null;
+                this.$root.errors = e.response.data.errors;
             })
         }
     }
