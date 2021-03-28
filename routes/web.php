@@ -32,5 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('equipments', EquipmentController::class);
 
     Route::get('/getClinics', [ClinicController::class, 'getClinics']);
+    Route::get('/getClinicByParams', [ClinicController::class, 'getClinicByParams']);
+
+    Route::get('/getEquipments', [EquipmentController::class, 'getEquipments']);
 });
 

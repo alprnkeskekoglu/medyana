@@ -88,7 +88,7 @@ class ClinicController extends Controller
     public function update(ClinicRequest $request, int $id)
     {
         $clinic = $this->clinicRepository->getById($id);
-        $response = $this->clinicRepository->update($clinic, $request);
+        $response = $this->clinicRepository->update($request, $clinic);
 
         return $this->output->output($response);
     }
@@ -109,7 +109,18 @@ class ClinicController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getClinics(Request $request)
+    public function getClinics()
+    {
+        $clinics = $this->clinicRepository->getAll();
+        $response = $this->clinicDataSource->collection($clinics);
+        return $this->output->output(['clinics' => $response]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getClinicByParams(Request $request)
     {
         $clinics = $this->clinicRepository->getByParameters($request);
         $response = $this->clinicDataSource->paginate($clinics);

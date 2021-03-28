@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Clinic;
+use App\Models\Equipment;
 use Illuminate\Database\Seeder;
 
-class ClinicSeeder extends Seeder
+class EquipmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class ClinicSeeder extends Seeder
      */
     public function run()
     {
-        Clinic::factory()->count(50)->create();
+        Equipment::factory()->count(300)->create();
     }
 }

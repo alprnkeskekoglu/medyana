@@ -11,6 +11,10 @@ Vue.component('clinic-index', require('./components/clinics/Index.vue').default)
 Vue.component('clinic-create', require('./components/clinics/Create.vue').default);
 Vue.component('clinic-edit', require('./components/clinics/Edit.vue').default);
 
+Vue.component('equipment-index', require('./components/equipments/Index.vue').default);
+Vue.component('equipment-create', require('./components/equipments/Create.vue').default);
+Vue.component('equipment-edit', require('./components/equipments/Edit.vue').default);
+
 if(document.getElementById("register")){
     window.register = new Vue({
         el: '#register',
