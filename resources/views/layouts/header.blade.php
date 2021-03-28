@@ -8,6 +8,16 @@
                     <span class="d-none d-sm-inline-block">{{ auth()->user()->name }}</span>
                     <i class="fa fa-fw fa-angle-down ml-1 d-none d-sm-inline-block"></i>
                 </button>
+
+
+                <div class="dropdown-menu dropdown-menu-right p-0" aria-labelledby="page-header-user-dropdown">
+                    <div class="p-2">
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('login.logout') }}">
+                            <i class="far fa-fw fa-arrow-alt-circle-left mr-1"></i> {{ __('DawnstarLang::auth.log_out') }}
+                        </a>
+                    </div>
+                </div>
             </div>
             @endauth
 
