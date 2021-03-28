@@ -19,7 +19,7 @@ class ClinicDataSource
             'status' => $clinic->status,
             'name' => $clinic->name,
             'equipment_count' => $clinic->equipments()->count(),
-            'created_at' => $clinic->created_at->format('d/m/Y'),
+            'created_at' => $clinic->created_at ? $clinic->created_at->format('d/m/Y') : 'N\A',
         ];
     }
 

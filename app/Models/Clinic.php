@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Clinic extends Model
@@ -16,7 +15,7 @@ class Clinic extends Model
 
     protected $guarded = ['id'];
 
-    public function equipments(): HasMany
+    public function equipments()
     {
         return $this->hasMany(Equipment::class);
     }

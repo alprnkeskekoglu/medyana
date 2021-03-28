@@ -23,7 +23,7 @@ class EquipmentDataSource
             'stock' => $equipment->stock,
             'unit_price' => $equipment->unit_price,
             'rate' => $equipment->rate,
-            'created_at' => $equipment->created_at->format('d/m/Y'),
+            'created_at' => $equipment->created_at ? $equipment->created_at->format('d/m/Y') : 'N\A',
             'clinic' => (new ClinicDataSource())->toArray($equipment->clinic)
         ];
     }

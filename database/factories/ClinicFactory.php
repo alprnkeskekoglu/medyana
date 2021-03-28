@@ -21,7 +21,7 @@ class ClinicFactory extends Factory
     {
         return [
             'status' => rand(1, 2),
-            'name' => $this->faker->name,
+            'name' => $this->faker->unique()->name,
         ];
     }
 }
