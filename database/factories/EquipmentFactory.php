@@ -23,7 +23,7 @@ class EquipmentFactory extends Factory
         return [
             'status' => rand(1, 2),
             'clinic_id' => Clinic::all()->random(1)->first()->id,
-            'name' => $this->faker->name,
+            'name' => $this->faker->unique()->name,
             'supply_date' => $this->faker->date(),
             'stock' => $this->faker->numberBetween(1, 100),
             'unit_price' => $this->faker->randomFloat(2, 0.01, 1000),
